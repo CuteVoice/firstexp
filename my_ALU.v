@@ -29,11 +29,24 @@ module my_ALU(
 	 always @(a or b or op)
 	 begin
 		case (op)
-			3'b000: c = ~a;
-			3'b001: c = a&b;
-			3'b010: c = a|b;
-			3'b011: c = a^b;
-			3'b100: {co , c} = a + b;
+			3'b000: begin 
+						c <= ~a;
+						co <= 1'b0;
+					  end
+			3'b001: begin 
+						c <= a&b;
+						co <= 1'b0;
+					  end						
+			3'b010: begin 
+						c <= a|b;
+						co <= 1'b0;
+					  end
+			3'b011: begin 
+						c <= a^b;
+						co <= 1'b0;
+					  end
+			3'b100: {co , c} <= a + b;
+			default: {co , c} <= 5'b00000;//Поставил нули, потому что при проверке в testbench "if" не реагировала на if({co,c}==5'bxxxxx)
 		endcase
 	 end
 

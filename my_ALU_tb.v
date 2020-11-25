@@ -32,6 +32,8 @@ module my_ALU_tb;
 	// Outputs
 	wire [3:0] c;
 	wire co;
+	
+	
 
 	// Instantiate the Unit Under Test (UUT)
 	my_ALU uut (
@@ -41,37 +43,70 @@ module my_ALU_tb;
 		.c(c), 
 		.co(co)
 	);
-
+	
+		integer i = 0;
+		
+	
+	
 	initial begin
+	   
 		
 		a = 4'b1110;
 		b = 4'b0000;
 		op = 3'b000;
+
 		#5;
+		if (c == ~a && co == 1'b0)
+		i = i+1;
 		
-		a = 4'b1110;
-		b = 4'b1010;
+		
+		
+		
+		a = 4'b1111;
+		b = 4'b1000;
 		op = 3'b001;
 		#5;
+		if (c == 4'b1000 && co == 1'b0)
+		i = i+1;
+		
 		
 		a = 4'b1010;
 		b = 4'b0001;
 		op = 3'b010;
 		#5;
+		if (c == a|b && co ==1'b0)
+		i = i+1;
 		
 		a = 4'b1110;
 		b = 4'b1000;
 		op = 3'b011;
 		#5;
+		if (c == a^b && co ==1'b0)
+		i = i+1;
 		
 		a = 4'b1110;
 		b = 4'b0100;
 		op = 3'b100;
 		#5;
+		if ({co, c}==a+b)
+		i = i+1;
+		
+		a = 4'b1001;
+		b = 4'b0001;
+		op = 3'b111;
+		#5;
+		if ({co, c}==5'b00000)
+		i = i+1;
+		
+		
+		if ( i== 6)
+		$display("Test completed succesfully!");
+		else
+		$display("Something's wrong!");
+        
 		
 		$finish;
 		
-        
 		
 
 	end
