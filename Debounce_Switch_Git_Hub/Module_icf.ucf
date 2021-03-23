@@ -1,0 +1,5 @@
+NET "clk" LOC = "C9";
+NET "clk" PERIOD = 20.0ns HIGH 40%;
+
+NET "i_switch" LOC = "D18";
+NET "LED" LOC = "E11";
